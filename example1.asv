@@ -1,0 +1,61 @@
+W = ceil(10*rand(3,3));
+W = W/sum(sum(W)); % construction of the matrix W of size 4 by 3
+
+n = length(W);
+
+sum_l = ones(1,n)*W; 
+if sum_l(1)>sum_l(2) %find i such that sum(W(:,i)) is the largest
+    i=1;
+else 
+    i=2;
+end  
+
+l = [1 2 3];
+l(:,i) = [];
+b = W(:,i);
+B = cqt(b(1),b); % construction of matrix B such that B*1 is larger than A*1 and C*1
+
+
+m = floor(n/2);
+a = W(:,l(1));
+c = W(:,l(2));
+
+a1 = flipud(a(1:m)); 
+a2 = a(m:end);
+c1 = flipud(c(1:m+1));
+c2 = c(m+1:end);
+
+
+corA = zeros(m-1,1);
+corC = zeros(m,1);
+
+for j = 1:m-1
+    corA(j) = sum(a1(j+1:end));
+end
+for j = 1:m
+    corC(j) = sum(c1(j+1:end));
+end
+
+A = cqt(a1,a2,corA);
+C = cqt(c1,c2,corC);
+
+Q=cqt(1,1)-C;
+A1=A*Q^(-1)*A;
+B1=B*Q^(-1)*B;
+C1=C+A*Q^(-1)*B+B*Q^(-1)*A;
+
+% norm(A,inf)+norm(C,inf);  %A与C的无穷范数和
+% norm(A,inf)*norm(B,inf);  %A与B的无穷范数积
+% (1-norm(C,inf))^2;        %（1-|C，inf|的平方）
+
+%检验条件
+%tic;
+%[G1,r1] = fixedpoint(A,B,C);
+%t1=toc;
+
+%tic;
+%[G3,r3] = CR0(A,B,C);
+%t3=toc;
+
+
+%不动点和CR的迭代
