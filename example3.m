@@ -30,10 +30,10 @@ HA0=cqt([mu mu], [mu], [1-lambda-mu, lambda]);
 
 
 
-%[W,r] = CR_NS(A,B,C);
 
-[W,r] = CR0(A,B,C);
-%[W1, r1]=fixedpoint_NS(A,B,C);
+
+[W,r] = fixedpoint(A,B,C);
+
 
 G=W^(-1)*Am1;
 R=A1*W^(-1);
