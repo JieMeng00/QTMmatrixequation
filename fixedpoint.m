@@ -1,5 +1,6 @@
 function [G,r] = fixedpoint(A,B,C)
 % TO COMPUTE THE SOLUTION OF THE EQUATION X+AX^{-1}B=Q; Q=I-C
+% G is the computed solution
 verb = true; maxit = 100; epsi = 1.e-14; cqtoption('threshold',10^(-15));
 I = cqt( 1, 1 );
 Q = I-C;
