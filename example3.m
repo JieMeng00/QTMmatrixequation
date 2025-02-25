@@ -24,15 +24,8 @@ C=A0;
 Q=I-A0;
 
 
-
-HA0=cqt([mu mu], [mu], [1-lambda-mu, lambda]);
-
-
-
-
-
-
 [W,r] = fixedpoint(A,B,C);
+[w1,r1] = fixedpoint2(A,B,C);
 
 
 G=W^(-1)*Am1;
